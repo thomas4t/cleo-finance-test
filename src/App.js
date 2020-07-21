@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
@@ -12,12 +11,16 @@ const MainContainer = styled.div`
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  .colorTest {
+    color: #61dafb;
+  }
 `;
 
 function App() {
   return (
     <MainContainer>
       <p>React app.</p>
+      <p className="colorTest">Test of color</p>
     </MainContainer>
   );
 }
