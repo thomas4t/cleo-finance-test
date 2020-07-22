@@ -90,15 +90,15 @@ const UserDetails = (props) => {
       .then((res) => {
         dispatch({
           type: "SET_SELECTED_USERS_REPOS",
-          val: res,
+          val: res.data,
         });
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
 
   const handleShowReposClick = (user) => {
     fetchUserRepos(user.login);
-    console.log(user.login);
   };
 
   return (
