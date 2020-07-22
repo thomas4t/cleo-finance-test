@@ -37,10 +37,16 @@ const UserDiv = styled.div`
   }
   .userBio {
     display: block;
-    font-size: 0.5em;
+    padding: 1px;
+    font-size: 0.6em;
+    font-weight: bold;
     text-decoration: underline;
+    background: none;
+    border: none;
+    outline: none;
+    color: #61dafb;
     :hover {
-      color: #61dafb;
+      color: #fff;
       cursor: pointer;
     }
   }
@@ -69,36 +75,39 @@ const UserDiv = styled.div`
 `;
 
 const UserDetails = (props) => {
+  const [userDetailedInfo, setUserDetailedInfo] = React.useState(null);
+  const [fetchingUserBio, setFetchingUserBio] = React.useState(false);
+  const [isBioDisplayed, setIsBioDisplayed] = React.useState(false);
   const dispatch = useDispatch();
 
-  const [userDetailedInfo, setUserDetailedInfo] = React.useState(null);
-
-  const fetchUserBio = (name) => {
-    setUserDetailedInfo(null);
-    axios
-      .get(`https://api.github.com/users/${name}`)
-      .then((res) => {
-        console.log(res.data);
-        setUserDetailedInfo(res.data);
-      })
-      .catch((err) => console.log(err));
+  const fetchUserBio = async (name) => {
+    setFetchingUserBio(true);
+    const response = await axios.get(`https://api.github.com/users/${name}`);
+    setUserDetailedInfo(response.data);
+    setFetchingUserBio(false);
   };
 
-  const fetchUserRepos = (login) => {
-    axios
-      .get(`https://api.github.com/users/${login}/repos`)
-      .then((res) => {
-        dispatch({
-          type: "SET_SELECTED_USERS_REPOS",
-          val: res.data,
-        });
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+  const fetchUserRepos = async (login) => {
+    const response = await axios.get(
+      `https://api.github.com/users/${login}/repos`
+    );
+    dispatch({
+      type: "SET_SELECTED_USERS_REPOS",
+      val: response.data,
+    });
   };
 
-  const handleShowReposClick = (user) => {
+  const handleOnShowReposClick = (user) => {
     fetchUserRepos(user.login);
+  };
+  const handleOnShowBioClick = () => {
+    setIsBioDisplayed(true);
+    if (userDetailedInfo === null) {
+      fetchUserBio(props.user.login);
+    }
+  };
+  const handleOnHideBioClick = () => {
+    setIsBioDisplayed(false);
   };
 
   return (
@@ -109,6 +118,7 @@ const UserDetails = (props) => {
       <div className="descriptionDiv">
         <span>
           <a
+            name="users-name"
             href={props.user.html_url}
             target="_blank"
             rel="noopener noreferrer"
@@ -116,26 +126,28 @@ const UserDetails = (props) => {
             {props.user.login}
           </a>
         </span>
-        {userDetailedInfo === null ? (
-          <span
+        {!isBioDisplayed ? (
+          <button
             className="userBio"
-            onClick={() => fetchUserBio(props.user.login)}
+            onClick={() => handleOnShowBioClick()}
+            disabled={fetchingUserBio}
           >
             Show more info
-          </span>
+          </button>
         ) : (
-          <span className="userBio" onClick={() => setUserDetailedInfo(null)}>
+          <button className="userBio" onClick={() => handleOnHideBioClick()}>
             Hide info
-          </span>
+          </button>
         )}
-
-        {userDetailedInfo === null ? null : (
-          <UserBio userDetailedInfo={userDetailedInfo} />
-        )}
+        <UserBio
+          userDetailedInfo={userDetailedInfo}
+          fetchingUserBio={fetchingUserBio}
+          isBioDisplayed={isBioDisplayed}
+        />
 
         <div className="userReposBtn">
           <Link to="/userRepos">
-            <button onClick={() => handleShowReposClick(props.user)}>
+            <button onClick={() => handleOnShowReposClick(props.user)}>
               Show user's repos
             </button>
           </Link>

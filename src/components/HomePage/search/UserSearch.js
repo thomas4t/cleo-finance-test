@@ -41,6 +41,12 @@ const StyledForm = styled(Form)`
     color: #61dafb;
     background-color: rgba(255, 255, 255, 0.1);
   }
+  button:disabled,
+  button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
 `;
 
 const UserSearch = (props) => {
@@ -67,7 +73,9 @@ const UserSearch = (props) => {
             <Field name="query" type="text" placeholder="Find a user" />
             <ErrorMessage name="query" component="div" />
           </div>
-          <button type="submit">Search</button>
+          <button type="submit" disabled={props.fetchingUsers}>
+            Search
+          </button>
         </StyledForm>
       </Formik>
     </>
