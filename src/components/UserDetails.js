@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import UserBio from "./UserBio";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 const UserDiv = styled.div`
   display: flex;
   align-self: flex-start;
@@ -67,6 +69,8 @@ const UserDiv = styled.div`
 `;
 
 const UserDetails = (props) => {
+  const dispatch = useDispatch();
+
   const [userDetailedInfo, setUserDetailedInfo] = React.useState(null);
 
   const fetchUserBio = (name) => {
@@ -79,6 +83,24 @@ const UserDetails = (props) => {
       })
       .catch((err) => console.log(err));
   };
+
+  const fetchUserRepos = (login) => {
+    axios
+      .get(`https://api.github.com/users/${login}/repos`)
+      .then((res) => {
+        dispatch({
+          type: "SET_SELECTED_USERS_REPOS",
+          val: res,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleShowReposClick = (user) => {
+    fetchUserRepos(user.login);
+    console.log(user.login);
+  };
+
   return (
     <UserDiv>
       <div className="avatarDiv">
@@ -112,7 +134,11 @@ const UserDetails = (props) => {
         )}
 
         <div className="userReposBtn">
-          <button onClick={() => alert(22)}>Show user's repos</button>
+          <Link to="/userRepos">
+            <button onClick={() => handleShowReposClick(props.user)}>
+              Show user's repos
+            </button>
+          </Link>
         </div>
       </div>
     </UserDiv>
