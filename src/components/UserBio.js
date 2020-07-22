@@ -9,6 +9,9 @@ const UserBio = (props) => {
   return (
     <StyledDiv>
       <p>
+        Amount of public repositories: {props.userDetailedInfo.public_repos}
+      </p>
+      <p>
         Name:{" "}
         {props.userDetailedInfo.name === null
           ? "Not provided"
