@@ -26,10 +26,10 @@ const Navbar = (props) => {
   return (
     <StyledNav>
       <StyledLink to="/">
-        <strong>Home</strong>
+        <strong>Find a user</strong>
       </StyledLink>
       <StyledLink to="/userRepos">
-        <strong>User repositories</strong>
+        <strong>User's repositories</strong>
       </StyledLink>
     </StyledNav>
   );

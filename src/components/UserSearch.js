@@ -68,11 +68,14 @@ const UserSearch = (props) => {
           query: Yup.string()
             .min(3, "Must be 3 characters or more")
             .max(15, "Must be 15 characters or less")
-            .required("Cannot be empty"),
+            .required("Cannot be empty")
+            .matches(
+              /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i,
+              "Invalid user name"
+            ),
         })}
         onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
-          console.log(values.query);
+          props.handleFormSubmit(values.query);
         }}
       >
         <StyledForm>

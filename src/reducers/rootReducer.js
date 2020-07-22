@@ -1,12 +1,12 @@
 const initialState = {
-  test: null,
+  searchResults: null,
 };
 
 const rootReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
-    case "SET_MAP_BOUNDS":
-      newState.mapBounds = action.val;
+    case "SET_SEARCH_RESULTS":
+      newState.searchResults = action.val;
       return newState;
     default:
       return newState;

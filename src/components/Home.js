@@ -4,57 +4,45 @@ import Navbar from "./Navbar";
 import MainContainer from "./Layout/MainContainer";
 import UserSearch from "./UserSearch";
 
+import { useSelector, useDispatch } from "react-redux";
+
 const Home = (props) => {
-  const [results, setResults] = React.useState([]);
+  const searchResults = useSelector((state) => state.searchResults);
+  const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
-  const [query, setQuery] = React.useState("");
 
   const fetchResults = (query) => {
-    if (query.length !== 0) {
-      axios
-        .get(`https://api.github.com/search/users?q=${query}`)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
-    } else {
-      console.log("please enter a search term");
-    }
+    axios
+      .get(`https://api.github.com/search/users?q=${query}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: "SET_SEARCH_RESULTS",
+          val: res.data.items,
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
-  const handleSearchInputChange = (event) => {
-    let newVal = event.target.value;
-    setQuery(newVal);
-  };
-
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (query) => {
     fetchResults(query);
   };
-
-  //   React.useEffect(() => {
-  //     console.log("XS");
-  //     let user = "thomas4t"; //gaearon
-  //     let url = `https://api.github.com/users/${user}`;
-  //     axios
-  //       .get(`https://api.github.com/search/users?q=Bundas`)
-  //       .then((res) => console.log(res.data));
-  //   }, []);
-
-  React.useEffect(() => {
-    console.log("change");
-  }, [results]);
 
   return (
     <MainContainer>
       <header>
         <Navbar />
       </header>
-      <UserSearch
-        query={query}
-        setResults={setResults}
-        handleSearchInputChange={handleSearchInputChange}
-        handleFormSubmit={handleFormSubmit}
-      />
-      <p className="colorTest">Test of color</p>
-      <p>second</p>
+      <UserSearch handleFormSubmit={handleFormSubmit} />
+      {searchResults === null ? (
+        <p>Enter a username first</p>
+      ) : searchResults.length === 0 ? (
+        <p>No results found</p>
+      ) : (
+        searchResults.map((user) => {
+          return <p key={user.id}>{user.login}</p>;
+        })
+      )}
     </MainContainer>
   );
 };
