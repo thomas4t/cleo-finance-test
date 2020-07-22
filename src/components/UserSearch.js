@@ -29,7 +29,6 @@ const StyledForm = styled(Form)`
   button {
     background-color: #000;
     color: #fff;
-    border: none;
     text-decoration: none;
     padding: 10px 20px 10px 20px;
     margin: 1%;
@@ -47,21 +46,6 @@ const StyledForm = styled(Form)`
 const UserSearch = (props) => {
   return (
     <>
-      {/* <form onSubmit={props.handleFormSubmit}>
-        <input
-          type="text"
-          placeholder="Find a user"
-          value={props.query}
-          onChange={props.handleSearchInputChange}
-        ></input>
-        <button>Search</button>
-      </form> */}
-
-      {/* //   searchTerm: Yup.string()
-        //     .min(3, "Search term must be at least 3 characters long")
-        //     .max(15, "Search term must be 15 chars or less")
-        //     .required("Required"),
-        //  */}
       <Formik
         initialValues={{ query: "" }}
         validationSchema={Yup.object({
