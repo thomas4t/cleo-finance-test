@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
-import MainContainer from "./Layout/MainContainer";
+import Navbar from "../Layout/Navbar";
+import MainContainer from "../Layout/MainContainer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";

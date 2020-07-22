@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import Navbar from "./Navbar";
-import MainContainer from "./Layout/MainContainer";
+import Navbar from "../Layout/Navbar";
+import MainContainer from "../Layout/MainContainer";
 import UserSearch from "./UserSearch";
 import UserDetails from "./UserDetails";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,23 +27,22 @@ const UserDetailsContainer = styled.div`
 const Home = (props) => {
   const searchResults = useSelector((state) => state.searchResults);
   const dispatch = useDispatch();
-  const [loading, setLoading] = React.useState(false);
+  const [fetchingUsers, setFetchingUsers] = React.useState(false);
 
-  const fetchResults = (query) => {
-    axios
-      .get(`https://api.github.com/search/users?q=${query}`)
-      .then((res) => {
-        console.log(res.data);
-        dispatch({
-          type: "SET_SEARCH_RESULTS",
-          val: res.data.items,
-        });
-      })
-      .catch((err) => console.log(err));
+  const fetchUsers = async (query) => {
+    setFetchingUsers(true);
+    const response = await axios.get(
+      `https://api.github.com/search/users?q=${query}`
+    );
+    dispatch({
+      type: "SET_SEARCH_RESULTS",
+      val: response.data.items,
+    });
+    setFetchingUsers(false);
   };
 
   const handleFormSubmit = (query) => {
-    fetchResults(query);
+    fetchUsers(query);
   };
 
   return (
