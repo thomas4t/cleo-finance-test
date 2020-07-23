@@ -8,7 +8,7 @@ const UserDiv = styled.div`
   display: flex;
   align-self: flex-start;
   height: auto;
-  margin: 1vmin 0;
+  margin: 1vmin auto;
   img {
     width: 10vmin;
     height: 10vmin;
@@ -88,12 +88,22 @@ const UserDetails = (props) => {
   };
 
   const fetchUserRepos = async (login) => {
+    //set loading to true
+    dispatch({
+      type: "FETCHING_USERS_REPOS",
+      val: true,
+    });
     const response = await axios.get(
       `https://api.github.com/users/${login}/repos`
     );
+    console.log(response.data);
     dispatch({
       type: "SET_SELECTED_USERS_REPOS",
       val: response.data,
+    });
+    dispatch({
+      type: "FETCHING_USERS_REPOS",
+      val: false,
     });
   };
 

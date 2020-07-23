@@ -3,7 +3,7 @@ import axios from "axios";
 import Navbar from "../Layout/Navbar";
 import MainContainer from "../Layout/MainContainer";
 import UserSearch from "./search/UserSearch";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import UserDetailsContainer from "./userInfo/UserDetailsContainer";
 
 const Home = (props) => {

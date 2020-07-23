@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import UserRepos from "./components/RepositoriesPage/UserRepos";
-import Home from "./components/HomePage/Home";
+import UserRepos from "./components/RepositoriesPage";
+import Home from "./components/HomePage";
 
 function App() {
   return (

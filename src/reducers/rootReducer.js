@@ -1,6 +1,7 @@
 const initialState = {
   searchResults: null,
   selectedUsersRepos: null,
+  fetchingUsersRepos: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,6 +12,9 @@ const rootReducer = (state = initialState, action) => {
       return newState;
     case "SET_SELECTED_USERS_REPOS":
       newState.selectedUsersRepos = action.val;
+      return newState;
+    case "FETCHING_USERS_REPOS":
+      newState.fetchingUsersRepos = action.val;
       return newState;
     default:
       return newState;
