@@ -96,7 +96,6 @@ const UserDetails = (props) => {
     const response = await axios.get(
       `https://api.github.com/users/${login}/repos`
     );
-    console.log(response.data);
     dispatch({
       type: "SET_SELECTED_USERS_REPOS",
       val: response.data,

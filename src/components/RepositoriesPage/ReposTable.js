@@ -33,6 +33,13 @@ const TableContainer = styled.div`
     .name {
       text-align: center;
       font-size: 0.9em;
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+      a:hover {
+        color: #61dafb;
+      }
     }
     .star-gazers {
       text-align: center;
@@ -44,10 +51,55 @@ const TableContainer = styled.div`
 
 const ReposTable = (props) => {
   const selectedUsersRepos = useSelector((state) => state.selectedUsersRepos);
+  const [displayedRepos, setDisplayedRepos] = React.useState(
+    selectedUsersRepos
+  );
+  const [isStarFilterOn, setIsStarFiterOn] = React.useState(false);
+
+  React.useEffect(() => {
+    setDisplayedRepos(selectedUsersRepos);
+  }, [selectedUsersRepos]);
+
+  const handleFilterByNameChange = (e) => {
+    let filterVal = e.target.value;
+    filterReposByName(filterVal);
+  };
+  const handleStarFilterChange = (e) => {
+    setIsStarFiterOn(e.target.checked);
+    //if query param is empty,
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      sortReposByStars();
+    }
+  };
+
+  const sortReposByStars = () => {
+    const cloned = [...displayedRepos];
+    cloned.sort((a, b) => b.stargazers_count - a.stargazers_count);
+    setDisplayedRepos(cloned);
+  };
+  const filterReposByName = (query) => {
+    const newRepos = selectedUsersRepos.filter((repo) =>
+      repo.name.includes(query)
+    );
+    //If star filter is on, filter it further
+    if (isStarFilterOn) {
+      console.log("I SHOULD ALSO FILTER IT BY STARS");
+      newRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+      setDisplayedRepos(newRepos);
+      //sortReposByStars();
+    } else {
+      console.log("leave it as is");
+      setDisplayedRepos(newRepos);
+    }
+  };
 
   return (
     <>
-      <ReposFilters />
+      <ReposFilters
+        handleFilterByNameChange={handleFilterByNameChange}
+        handleStarFilterChange={handleStarFilterChange}
+      />
       <TableContainer>
         <table>
           <thead>
@@ -57,10 +109,19 @@ const ReposTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {selectedUsersRepos.map((repo) => {
+            {displayedRepos.map((repo) => {
               return (
                 <tr key={repo.id}>
-                  <td className="name">{repo.name}</td>
+                  <td className="name">
+                    <a
+                      name="repo-name"
+                      href={repo.svn_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {repo.name}
+                    </a>
+                  </td>
                   <td>{repo.stargazers_count}</td>
                 </tr>
               );

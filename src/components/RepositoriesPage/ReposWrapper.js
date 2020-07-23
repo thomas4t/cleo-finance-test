@@ -55,10 +55,6 @@ const ReposWrapper = (props) => {
         <ReposTable />
       </div>
     );
-
-    // selectedUsersRepos.map((repo) => {
-    //   return <p key={repo.id}>{repo.name}</p>;
-    // });
   }
 };
 export default ReposWrapper;

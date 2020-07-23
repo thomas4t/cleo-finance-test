@@ -30,6 +30,9 @@ const StyledInputDiv = styled.div`
   }
   label {
     padding-left: 2%;
+    input {
+      margin: 10px;
+    }
     input:hover {
       cursor: pointer;
     }
@@ -38,21 +41,6 @@ const StyledInputDiv = styled.div`
     color: #61dafb;
     cursor: pointer;
   }
-  /*
-  .checkbox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-  }
-  .checkbox:hover {
-    background-color: #ccc;
-  }
-  .checkbox:checked {
-    background-color: #2196f3;
-  } */
 `;
 
 const ReposFilters = (props) => {
@@ -62,10 +50,15 @@ const ReposFilters = (props) => {
         className="text-input"
         type="text"
         placeholder="Filter repos by name"
+        onChange={props.handleFilterByNameChange}
       />
       <label>
-        Filter by star gazers
-        <input type="checkbox" className="checkbox"></input>
+        Sort by star gazers
+        <input
+          type="checkbox"
+          className="checkbox"
+          onClick={props.handleStarFilterChange}
+        ></input>
       </label>
     </StyledInputDiv>
   );
