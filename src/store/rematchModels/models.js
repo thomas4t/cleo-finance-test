@@ -7,7 +7,7 @@ export const searchResults = {
   },
 };
 export const selectedUsersRepos = {
-  state: null, // initial state
+  state: null,
   reducers: {
     set(state, payload) {
       return payload;
@@ -15,7 +15,15 @@ export const selectedUsersRepos = {
   },
 };
 export const fetchingUsersRepos = {
-  state: false, // initial state
+  state: false,
+  reducers: {
+    set(state, payload) {
+      return payload;
+    },
+  },
+};
+export const detailedRepo = {
+  state: null,
   reducers: {
     set(state, payload) {
       return payload;

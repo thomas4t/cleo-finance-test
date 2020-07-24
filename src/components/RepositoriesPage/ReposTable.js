@@ -1,7 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ReposFilters from "./ReposFilters";
+import { Link } from "react-router-dom";
 
 const TableContainer = styled.div`
   width: 40vw;
@@ -31,14 +32,25 @@ const TableContainer = styled.div`
       padding: 0 2%;
     }
     .name {
-      text-align: center;
+      text-align: left;
       font-size: 0.9em;
+      padding-left: 5%;
       a {
         text-decoration: none;
         color: #fff;
       }
       a:hover {
         color: #61dafb;
+      }
+      span {
+        padding-left: 2%;
+        a {
+          font-size: 0.75em;
+          color: #61dafb;
+        }
+        a:hover {
+          color: rgba(255, 255, 255, 0.8);
+        }
       }
     }
     .star-gazers {
@@ -50,6 +62,7 @@ const TableContainer = styled.div`
 `;
 
 const ReposTable = (props) => {
+  const dispatch = useDispatch();
   const selectedUsersRepos = useSelector((state) => state.selectedUsersRepos);
   const [displayedRepos, setDisplayedRepos] = React.useState(
     selectedUsersRepos
@@ -80,14 +93,18 @@ const ReposTable = (props) => {
     const newRepos = selectedUsersRepos.filter((repo) =>
       repo.name.includes(query)
     );
-    //If star filter is on, filter it further
+    //If star filter is on, filter it by stars as well
+    //TODO
+    //Change sortReposByStars func so that it returns intead of setting
     if (isStarFilterOn) {
       newRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
       setDisplayedRepos(newRepos);
-      //sortReposByStars();
     } else {
       setDisplayedRepos(newRepos);
     }
+  };
+  const handleRouteToDetailsClick = (repo) => {
+    dispatch.detailedRepo.set(repo);
   };
 
   return (
@@ -117,6 +134,14 @@ const ReposTable = (props) => {
                     >
                       {repo.name}
                     </a>
+                    <span>
+                      <Link
+                        to="/detailed-repo"
+                        onClick={() => handleRouteToDetailsClick(repo)}
+                      >
+                        Show details
+                      </Link>
+                    </span>
                   </td>
                   <td>{repo.stargazers_count}</td>
                 </tr>
