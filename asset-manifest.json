@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/cleoFinanceTest/static/css/main.0c907582.chunk.css",
-    "main.js": "/cleoFinanceTest/static/js/main.c8fd5247.chunk.js",
-    "main.js.map": "/cleoFinanceTest/static/js/main.c8fd5247.chunk.js.map",
-    "runtime-main.js": "/cleoFinanceTest/static/js/runtime-main.3e58ec32.js",
-    "runtime-main.js.map": "/cleoFinanceTest/static/js/runtime-main.3e58ec32.js.map",
-    "static/js/2.4dc8dbbb.chunk.js": "/cleoFinanceTest/static/js/2.4dc8dbbb.chunk.js",
-    "static/js/2.4dc8dbbb.chunk.js.map": "/cleoFinanceTest/static/js/2.4dc8dbbb.chunk.js.map",
-    "index.html": "/cleoFinanceTest/index.html",
-    "precache-manifest.23297b887cb8b5fc3fc4afb440771edb.js": "/cleoFinanceTest/precache-manifest.23297b887cb8b5fc3fc4afb440771edb.js",
-    "service-worker.js": "/cleoFinanceTest/service-worker.js",
-    "static/css/main.0c907582.chunk.css.map": "/cleoFinanceTest/static/css/main.0c907582.chunk.css.map",
-    "static/js/2.4dc8dbbb.chunk.js.LICENSE.txt": "/cleoFinanceTest/static/js/2.4dc8dbbb.chunk.js.LICENSE.txt"
+    "main.css": "/cleo-finance-test/static/css/main.0c907582.chunk.css",
+    "main.js": "/cleo-finance-test/static/js/main.34eb0605.chunk.js",
+    "main.js.map": "/cleo-finance-test/static/js/main.34eb0605.chunk.js.map",
+    "runtime-main.js": "/cleo-finance-test/static/js/runtime-main.1302c286.js",
+    "runtime-main.js.map": "/cleo-finance-test/static/js/runtime-main.1302c286.js.map",
+    "static/js/2.ad6e10e7.chunk.js": "/cleo-finance-test/static/js/2.ad6e10e7.chunk.js",
+    "static/js/2.ad6e10e7.chunk.js.map": "/cleo-finance-test/static/js/2.ad6e10e7.chunk.js.map",
+    "index.html": "/cleo-finance-test/index.html",
+    "precache-manifest.cf703aa22e997c9cf59a4cec25224ac3.js": "/cleo-finance-test/precache-manifest.cf703aa22e997c9cf59a4cec25224ac3.js",
+    "service-worker.js": "/cleo-finance-test/service-worker.js",
+    "static/css/main.0c907582.chunk.css.map": "/cleo-finance-test/static/css/main.0c907582.chunk.css.map",
+    "static/js/2.ad6e10e7.chunk.js.LICENSE.txt": "/cleo-finance-test/static/js/2.ad6e10e7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3e58ec32.js",
-    "static/js/2.4dc8dbbb.chunk.js",
+    "static/js/runtime-main.1302c286.js",
+    "static/js/2.ad6e10e7.chunk.js",
     "static/css/main.0c907582.chunk.css",
-    "static/js/main.c8fd5247.chunk.js"
+    "static/js/main.34eb0605.chunk.js"
   ]
 }
