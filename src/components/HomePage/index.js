@@ -4,6 +4,7 @@ import Navbar from "../Layout/Navbar";
 import MainContainer from "../Layout/MainContainer";
 import UserSearch from "./search/UserSearch";
 import { useDispatch } from "react-redux";
+
 import UserDetailsContainer from "./userInfo/UserDetailsContainer";
 
 const Home = (props) => {
@@ -15,10 +16,7 @@ const Home = (props) => {
     const response = await axios.get(
       `https://api.github.com/search/users?q=${query}`
     );
-    dispatch({
-      type: "SET_SEARCH_RESULTS",
-      val: response.data.items,
-    });
+    dispatch.searchResults.set(response.data.items);
     setFetchingUsers(false);
   };
 

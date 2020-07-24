@@ -89,21 +89,13 @@ const UserDetails = (props) => {
 
   const fetchUserRepos = async (login) => {
     //set loading to true
-    dispatch({
-      type: "FETCHING_USERS_REPOS",
-      val: true,
-    });
+    dispatch.fetchingUsersRepos.set(true);
     const response = await axios.get(
       `https://api.github.com/users/${login}/repos`
     );
-    dispatch({
-      type: "SET_SELECTED_USERS_REPOS",
-      val: response.data,
-    });
-    dispatch({
-      type: "FETCHING_USERS_REPOS",
-      val: false,
-    });
+    dispatch.selectedUsersRepos.set(response.data);
+    //set loading to false
+    dispatch.fetchingUsersRepos.set(false);
   };
 
   const handleOnShowReposClick = (user) => {

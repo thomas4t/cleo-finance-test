@@ -4,7 +4,6 @@ import MainContainer from "../Layout/MainContainer";
 import ReposTable from "./ReposWrapper";
 
 const UserRepos = (props) => {
-  // const dispatch = useDispatch();
   return (
     <MainContainer>
       <header>

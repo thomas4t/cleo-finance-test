@@ -66,8 +66,6 @@ const ReposTable = (props) => {
   };
   const handleStarFilterChange = (e) => {
     setIsStarFiterOn(e.target.checked);
-    //if query param is empty,
-    console.log(e.target.checked);
     if (e.target.checked) {
       sortReposByStars();
     }
@@ -84,12 +82,10 @@ const ReposTable = (props) => {
     );
     //If star filter is on, filter it further
     if (isStarFilterOn) {
-      console.log("I SHOULD ALSO FILTER IT BY STARS");
       newRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
       setDisplayedRepos(newRepos);
       //sortReposByStars();
     } else {
-      console.log("leave it as is");
       setDisplayedRepos(newRepos);
     }
   };
