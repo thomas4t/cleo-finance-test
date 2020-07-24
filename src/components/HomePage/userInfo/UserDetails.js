@@ -155,7 +155,7 @@ const UserDetails = (props) => {
         />
 
         <div className="userReposBtn">
-          <Link to="/userRepos">
+          <Link to="/user-repos">
             <button onClick={() => handleOnShowReposClick(props.user)}>
               Show user's repos
             </button>

@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact component={Home}></Route>
-        <Route path="/userRepos" exact component={UserRepos}></Route>
+        <Route path="/user-repos" exact component={UserRepos}></Route>
       </Switch>
     </Router>
   );

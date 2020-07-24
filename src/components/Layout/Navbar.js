@@ -28,7 +28,7 @@ const Navbar = (props) => {
       <StyledLink to="/">
         <strong>Find a user</strong>
       </StyledLink>
-      <StyledLink to="/userRepos">
+      <StyledLink to="/user-repos">
         <strong>User's repositories</strong>
       </StyledLink>
     </StyledNav>
